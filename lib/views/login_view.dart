@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
+import 'dart:developer' as devtool show log;
 
 class LoginView extends StatefulWidget {
   const LoginView({Key? key}) : super(key: key);
@@ -59,21 +59,21 @@ return  Scaffold(
               TextButton(
                 onPressed: () async {
                   try{
-                     final email = _email.text;
-                  final password = _password.text;
-          
-                  final userCredential =
-                      await FirebaseAuth.instance.signInWithEmailAndPassword(
+                    final email = _email.text;
+                    final password = _password.text;
+                    await FirebaseAuth.instance.signInWithEmailAndPassword(
                     email: email,
                     password: password,
                   );
-          
-                  print(userCredential);
+                  Navigator.of(context).pushNamedAndRemoveUntil(
+                    '/notes/',
+                    (route)=>false,
+                    );                
                   } on FirebaseAuthException catch(e){
                    if(e.code == 'invalid-credential'){
-                    print('Invalid-credential');
+                    devtool.log('Invalid-credential');
                    }else if(e.code == 'wrong-password'){
-                    print('Wrong-password');
+                    devtool.log('Wrong-password');
                    }
                   }
                  
