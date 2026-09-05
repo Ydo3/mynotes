@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "683065706500",
+    "project_id": "mynotes-yosef-flutter",
+    "storage_bucket": "mynotes-yosef-flutter.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:683065706500:android:b1a450caf92d6d6b4d4d51",
+        "android_client_info": {
+          "package_name": "com.yosef.mynotes"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD826az9SxOuLNzJF7zheo7ElidInB6BO0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
