@@ -17,6 +17,17 @@ class _VerifyEmailViewState extends State<VerifyEmailView> {
         title: const Text('Verify email'),
         backgroundColor: Colors.blue,
         foregroundColor: Colors.white,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () async {
+            await FirebaseAuth.instance.signOut();
+            if (!context.mounted) return;
+            Navigator.of(context).pushNamedAndRemoveUntil(
+              registerRoute,
+              (route) => false,
+            );
+          },
+        ),
       ),
       body: Column(
         children: [
