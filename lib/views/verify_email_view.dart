@@ -1,6 +1,6 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mynotes/constants/routs.dart';
+import 'package:mynotes/services/auth/auth_service.dart';
 
 class VerifyEmailView extends StatefulWidget {
   const VerifyEmailView({super.key});
@@ -20,7 +20,7 @@ class _VerifyEmailViewState extends State<VerifyEmailView> {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () async {
-            await FirebaseAuth.instance.signOut();
+            await AuthService.firebase().logOut();
             if (!context.mounted) return;
             Navigator.of(context).pushNamedAndRemoveUntil(
               registerRoute,
@@ -31,21 +31,24 @@ class _VerifyEmailViewState extends State<VerifyEmailView> {
       ),
       body: Column(
         children: [
-          const Text("We've sent you an email verificarion. Please open it to verify your account."),
-          const Text("If you haven't received an email verificartion yet, press the button below."),
+          const Text(
+            "We've sent you an email verificarion. Please open it to verify your account.",
+          ),
+          const Text(
+            "If you haven't received an email verificartion yet, press the button below.",
+          ),
           TextButton(
             onPressed: () async {
-              final user = FirebaseAuth.instance.currentUser;
-              await user?.sendEmailVerification();
+              await AuthService.firebase().sendEmailVeification();
             },
             child: const Text('Send email verification.'),
           ),
           TextButton(
             onPressed: () async {
-            await FirebaseAuth.instance.signOut();
-            Navigator.of(context).pushNamedAndRemoveUntil(
-              registerRoute,
-              (route)=>false);
+              await AuthService.firebase().logOut();
+              Navigator.of(
+                context,
+              ).pushNamedAndRemoveUntil(registerRoute, (route) => false);
             },
             child: const Text('Restart'),
           ),
