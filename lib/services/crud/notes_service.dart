@@ -43,7 +43,7 @@ class NotesService {
     //make sure note exists
     await getNote(id: note.id);
     //update DB
-    final updatesCount = db.update(noteTable, {
+    final updatesCount = await db.update(noteTable, {
       textColumn: text,
       isSyncedWithCloudColumn: 0,
     });
@@ -123,7 +123,13 @@ class NotesService {
     const text = '';
     //create the note
 
-    final noteId = await db.insert(noteTable, {
+    final maxIdResult = await db.rawQuery(
+      'SELECT MAX($idColumn) AS max_id FROM $noteTable',
+    );
+    final maxId = maxIdResult.first['max_id'] as int?;
+    final noteId = (maxId ?? 0) + 1;
+    await db.insert(noteTable, {
+      idColumn: noteId,
       userIdColumn: owner.id,
       textColumn: text,
       isSyncedWithCloudColumn: 1,
