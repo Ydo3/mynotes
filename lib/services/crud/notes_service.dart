@@ -1,4 +1,4 @@
-import 'dart:async';
+/*import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import 'package:mynotes/extensions/extensions/list/filter.dart';
@@ -351,4 +351,4 @@ const createNoteTable = '''
 	         PRIMARY KEY("id","is_synced_with_cloud"),
 	         FOREIGN KEY("user_id") REFERENCES "user"("id")
          );
-         ''';
+         ''';*/
